@@ -1,0 +1,19 @@
+version: "3.7"
+
+services:
+  mariadb:
+    container_name: mariadb_local
+    image: mariadb
+    volumes:
+    - db_data:/var/lib/mariadb
+    ports:
+    - 3306:3306
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: test
+      MARIADB_DATABASE: test
+      MARIADB_USER: user
+      MARIADB_PASSWORD: usersecret
+
+volumes:
+  db_data: {}
