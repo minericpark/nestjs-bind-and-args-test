@@ -1,0 +1,30 @@
+scalar DateTime
+
+interface Base {
+    id: Float!
+    createdOn: DateTime!
+    updatedOn: DateTime!
+}
+
+type Test implements Base {
+    id: Float!
+    createdOn: DateTime!
+    updatedOn: DateTime!
+    firstName: String!
+    lastName: String!
+}
+
+type Query {
+    hello: String
+    tests: [Test]
+    test(id: Int!): Test
+}
+
+type Mutation {
+    createTest(createTestInput: CreateTestInput!): Test
+}
+
+input CreateTestInput {
+    lastName: String
+    firstName: String
+}

@@ -12,7 +12,11 @@ import { TestModule } from './modules/test.module';
   imports: [
     TypeOrmModule.forRoot(),
     GraphQLModule.forRoot({
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      typePaths: ['./**/*test.graphql'],
+      definition: {
+        path: join(process.cwd(), 'src/graphql.js'),
+        outputAs: 'class',
+      }
     }),
     TestModule,
   ],

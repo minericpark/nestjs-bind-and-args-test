@@ -4,7 +4,7 @@ import { Test } from '../entities/test.entity';
 import { TestService } from '../services/test.service';
 import { CreateTestInput } from '../inputs/create-test.input';
 
-@Resolver(of => Test)
+@Resolver('Test')
 @Dependencies(TestService)
 export class TestResolver {
     constructor(testService){
@@ -21,10 +21,17 @@ export class TestResolver {
         return this.testService.getHello();
     }
 
-    @Mutation(returns => Test)
+    @Query(returns => Test)
+    @Bind(Args('id', { type: () => Number }))
+    test(id) {
+        return this.testService.findOne(id);
+    }
+
+    @Mutation(returns => [Test])
     @Bind(Args('createTestInput', { type: () => CreateTestInput }))
-    createAddress(createTestInput) {
+    createTest(createTestInput) {
         return this.testService.create(createTestInput);
     }
+
 
 }
